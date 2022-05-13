@@ -1,0 +1,70 @@
+.home{
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
+}
+
+.labels{
+	margin-bottom: 10px;
+	font-size: 1.5em;
+}
+
+.labels > button{
+	width:40px;
+	padding: 0 5px;
+	margin: 0 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	-o-border-radius: 20px;
+}
+
+.labels > button:active{
+	transition: .2s linear;
+	transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-webkit-transition: .2s linear;
+	-moz-transition: .2s linear;
+	-ms-transition: .2s linear;
+	-o-transition: .2s linear;
+}
+
+.form{
+	padding:10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 200px;
+	width:  200px;
+	border: 3px solid var(--PrimaryColor);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+
+input{
+	width: 70%;
+}
+
+.inpConverte{
+	margin-bottom: 20px;
+}
+
+.inpAmount {
+	padding-left: 5px;
+}
+
+.changeIcon{
+	max-width:100%;
+}
