@@ -1,15 +1,11 @@
 import reqGetRecords from "../../services/reqGetRecords";
 import { useEffect, useState } from 'react';
 import reqDeleteRecords from './../../services/reqDeleteRecords';
-import { NavLink } from "react-router-dom";
+import './styles.css'
 
 const Index = () => {
 	const [records, setRecords]=useState([])
 	const [deleting, setDeleting]=useState(false)
-
-// const handleDeleteRecords =()=>{
-
-// }
 	
 useEffect(() => {
 	const reqRecords = async _ =>{
@@ -19,20 +15,41 @@ useEffect(() => {
 	reqRecords()
 }, [deleting]);
 
-		return records.length > 0 ? (<ul>
-			{records.map(r=><li key={r.id}>
-					<h4>From {r.fromArg} </h4>
-					<h4>Amount {r.amount} </h4>
-					<h4>To {r.toArg} </h4>
-					<h4>Result {r.result} </h4>
-					<h4>Date {r.date} </h4>
-			</li> 
-			)}
-			<button onClick={async()=>{
-				await reqDeleteRecords()
-				setDeleting(!deleting)
-			}}> Delete </button>
-		</ul>) : <h4>No hay resultados para mostrar</h4>
+		return <div className='containerRecords'>
+			{
+		 		records.length > 0 ? 
+					(<>
+					<table className="recordsTable">
+						<thead>
+							<tr>
+								<th>From</th>
+								<th>$</th>
+								<th>To</th>
+								<th>$</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{records.map(r=><tr key={r.id}>
+								<td>{r.fromArg} </td>
+								<td>{r.amount} </td>
+								<td>{r.toArg} </td>
+								<td>{r.result} </td>
+								<td>{r.date} </td>
+							</tr> 
+							)}
+						</tbody>
+					</table>
+					<button className='btnDelete' onClick={async()=>{
+						await reqDeleteRecords()
+						setDeleting(!deleting)
+					}}> Delete </button>
+					</>)
+							: <h4 className='titleNotResults'>There are no results to show</h4>
+			}
+
+		</div>
+		
 	
 		
 	

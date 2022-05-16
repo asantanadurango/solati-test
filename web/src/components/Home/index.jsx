@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import reqApi from '../../services/reqApi.js'
-import './styles.css'
 import changeIcon from '../../assets/changeIcon.png'
 import reqSaveRecord from '../../services/reqSaveRecord.js'
+import './styles.css'
 function Home() {
   const [toFrom, setToFrom] = useState({to:"USD", from:"COP"})
   const [amount, setAmount] = useState(0)
@@ -26,8 +26,11 @@ function Home() {
   } 
 
   useEffect(() => {
-    // console.log("oe")
-    if(isNaN(amount) || amount==false) return
+    console.log(amount)
+    if(isNaN(amount) || !amount){
+      setResult(0);
+      return;
+    }
     const handleConvert = async(from, to, amount) =>{
       const data = await reqApi(from, to, amount)
       const result = data.result.COP ? data.result.COP : data.result.USD
@@ -45,10 +48,10 @@ function Home() {
             <span>{toFrom.to}</span>
           </div>
 
-        <form className='form'>
+        <form className='form' onSubmit={e => e.preventDefault()}>
           <h3>Convert</h3>
           <div className='boxAmount'>
-          <input className='inpAmount' type="text" id="inpAmount" onChange={(e)=>{
+          <input className='inpAmount' autoComplete='off' type="text" id="inpAmount" onChange={(e)=>{
             handleChangeAmount(e)
           }}
             placeholder="0"
@@ -59,9 +62,11 @@ function Home() {
           </div>
          
 
-          <button type='button' onClick={()=>{
+          {
+            (!isNaN(amount) && amount) ?  (<button type='button' className='btnSave' onClick={()=>{
             handleSaveRecord({fromArg:toFrom.from, amount, toArg:toFrom.to, result})
-          }}>Save Record</button>
+          }}> <span>Save Record</span> </button>):null
+          }
         </form>
 
     </div>
